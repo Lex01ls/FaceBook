@@ -1,28 +1,9 @@
 import { StyleSheet, Text, View, StatusBar,TouchableOpacity, TextInput, ScrollView, Image } from 'react-native';
 import { MaterialCommunityIcons,EvilIcons,Entypo,MaterialIcons,Ionicons,SimpleLineIcons,FontAwesome5 } from '@expo/vector-icons';
-import React,{useState} from 'react';
-import Posts from './Posts'
+import {useState} from 'react';
 
-export default function App() {
-  const [post, setPost] = useState('');
-  const [list, setList] = useState([])
-  const [totalLikes, setTotalLikes] = useState();
 
-  
-    function LIKE(){
-    setLikes(likes+1)
-
-    setTotalLikes(totalLikes+likes);
-    }
-
-  function transform(obj) {
-    return <Posts post={obj.post} totalLikes={obj.totalLikes} />
-  }
-
-  function addPost(){
-    setList([{post: post,totalLikes:totalLikes , setTotalLikes:setTotalLikes}, ...list])
-    setPost('')
-  }
+export default function Main() {
  
   return (
   <>
@@ -68,30 +49,41 @@ export default function App() {
         </TouchableOpacity>
 
       </View>
-      <ScrollView>
       <View style={styles.post}>
         <Image source={require('./assets/images/29273.jpg')} style={styles.image}/>
 
-       <TextInput 
-          style={styles.postTextInput}
-          value={post}
-          onChangeText={setPost}
-          placeholder="What is on your mind?"
-          />
-
-        <TouchableOpacity onPress={addPost}>
-        <Text style={styles.postText}>POST</Text>
+        <TouchableOpacity onPress={Post}>
+        <Text style={styles.postText}>What is on your mind?</Text>
+        
         </TouchableOpacity>
 
         <TouchableOpacity><Ionicons name="md-images-outline" size={24} color="green" /></TouchableOpacity>
 
       </View>
-      
-      
-      <View style={styles.body}>
-        {list.map(item => transform(item))}
+      <View style={styles.Navigation}>
+          <Text style={styles.postText}>Stories</Text>
+          <Text style={styles.postText}>Reels</Text>
+          <Text style={styles.postText}>Rooms</Text>
       </View>
+
+
+      <ScrollView horizontal>
+        <View style={styles.Stories}>
+          <Image source={require('./assets/images/pexels-kinkate-421160.jpg')} resizeMode='cover' style={styles.storyImage}></Image>
+          <Image source={require('./assets/images/pexels-pixabay-163489.jpg')} resizeMode='cover' style={styles.storyImage}></Image>
+          <Image source={require('./assets/images/pexels-pixabay-260024.jpg')} resizeMode='cover' style={styles.storyImage}></Image>
+          <Image source={require('./assets/images/pexels-pixabay-39308.jpg')} resizeMode='cover' style={styles.storyImage}></Image>
+          <Image source={require('./assets/images/pexels-pixabay-40751.jpg')} resizeMode='cover' style={styles.storyImage}></Image>
+        </View>
       </ScrollView>
+      <View style={styles.body}>
+
+      
+      
+      </View>
+      <View style={styles.footer}>
+      
+      </View>
     </View>
     </>
   );
@@ -99,8 +91,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
-    backgroundColor: 'onyx',
+    width:'100%',
+    height:'100%',
+    backgroundColor: '#534b4f',
     
   },
 
@@ -118,6 +111,7 @@ const styles = StyleSheet.create({
     alignItems:"center"
   },
 
+ 
   headerText: {
     fontSize:30,
     fontWeight:'bold',
@@ -137,11 +131,8 @@ const styles = StyleSheet.create({
 
     flexDirection:'row',
     padding:10,
-    marginBottom:10,
-    marginTop:5,
-    justifyContent:"space-between",
-    backgroundColor: 'white',
-    borderBottomWidth:1,
+    margin:10,
+    justifyContent:"space-between"
   },
 
   image:{
@@ -152,7 +143,7 @@ const styles = StyleSheet.create({
 
   postText:{
     fontSize:14,
-    color:'black'
+    color:'#fff'
   },
 
   postTextInput:{
@@ -165,9 +156,8 @@ const styles = StyleSheet.create({
     marginRight:20,
     borderColor:"white",
     color:"white",
-    alignSelf:'flex-start',
-    borderWidth:1,
-    color:"black",
+    width:250,
+    alignSelf:'flex-start'
   },
 
   Navigation:{
@@ -177,6 +167,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   
+
   Stories:{
     padding:10,
     width:100,
@@ -195,8 +186,14 @@ const styles = StyleSheet.create({
 
   body: {
     
-    backgroundColor:'transparent',
+    backgroundColor:'#fff',
+  },
+
+  footer: {
     
+    borderTopLeftRadius:30,
+    borderTopRightRadius:30,
+    backgroundColor:'#1e90ff'
   },
 
 });
